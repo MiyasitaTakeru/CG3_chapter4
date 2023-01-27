@@ -55,6 +55,14 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input)
 	objSkydome = Object3d::Create();
 	objGround = Object3d::Create();
 	objFighter = Object3d::Create();
+	// スフィア表示
+	//modelSphere = Model::CreateFromOBJ("Sphere");
+	modelSphere = Model::CreateFromOBJ("Sphere", true);
+	objSphere = Object3d::Create();
+	objSphere->SetModel(modelSphere);
+	objFighter->SetPosition({ +1,0,0 });
+	objSphere->SetPosition({ -1,1,0 });
+
 
 	// テクスチャ2番に読み込み
 	Sprite::LoadTexture(2, L"Resources/texture.png");
@@ -72,13 +80,15 @@ void GameScene::Update()
 {
 	camera->Update();
 
-	objSkydome->Update();
-	objGround->Update();
+	//objSkydome->Update();
+	//objGround->Update();
 	objFighter->Update();
+	objSphere->Update();
 
 	debugText.Print("AD: move camera LeftRight", 50, 50, 1.0f);
 	debugText.Print("WS: move camera UpDown", 50, 70, 1.0f);
 	debugText.Print("ARROW: move camera FrontBack", 50, 90, 1.0f);
+
 }
 
 void GameScene::Draw()
@@ -110,7 +120,7 @@ void GameScene::Draw()
 	objSkydome->Draw();
 	objGround->Draw();
 	objFighter->Draw();
-
+	objSphere->Draw();
 	/// <summary>
 	/// ここに3Dオブジェクトの描画処理を追加できる
 	/// </summary>
